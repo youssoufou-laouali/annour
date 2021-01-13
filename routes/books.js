@@ -7,12 +7,17 @@ router.post('/', async (req, res)=>{
     const error= await validateBook(req.body)
     //if (error.message) res.status(401).send(error.message)
     book = new Book({
-        name: req.body.bookName,
-        author:{
-            name: req.body.authorName,
-            age: req.body.authorAge
-        },
-        genre: req.body.genre
+        nameBook:req.body.nameBook ,
+        sommaire:req.body.sommaire ,
+        description:req.body.description ,
+        read:req.body.read ,
+        start: req.body.start,
+        vue:req.body.vue ,
+        motCles:req.body.motCles ,
+        lienPhoto:req.body.lienPhoto ,
+        lienPdf:req.body.lienPdf ,
+        frequence:req.body.frequence ,
+        authorName:req.body.authorName ,
     })
 
     book.save()
@@ -42,13 +47,19 @@ router.get('/:id', async(req, res)=>{
 router.put('/:id', async (req, res)=>{
     const updateBook = await Book.findByIdAndUpdate(
         req.params.id,
-        {
-            name: req.body.bookName,
-            author:{
-                name: req.body.authorName,
-                age: req.body.authorAge
-            },
-            genre: req.body.genre
+        {$set : {
+            nameBook:req.body.nameBook ,
+            sommaire:req.body.sommaire ,
+            description:req.body.description ,
+            read:req.body.read ,
+            start: req.body.start,
+            vue:req.body.vue ,
+            motCles:req.body.motCles ,
+            lienPhoto:req.body.lienPhoto ,
+            lienPdf:req.body.lienPdf ,
+            frequence:req.body.frequence ,
+            authorName:req.body.authorName ,
+        }
         },
         { new: true }
     )

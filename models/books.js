@@ -1,26 +1,68 @@
 const mongoose= require('mongoose')
-const Author = require('./author')
 const yup= require('yup')
 
 const BookShema= new mongoose.Schema({
-    name:{
+    nameBook:{
         type: String,
         required: true
     },
-    author: Author.schema,
-    genre:{
+    sommaire: { 
+        type : Array ,
+         default : [] 
+    },
+    description:{
         type: String,
-        required: true,
-        minlength: 3,
-        maxlength: 20
+        minlength: 40,
+        required: true
+    },
+    read:{
+        type: Number,
+        required: true
+    },
+    start:{
+        type: Number,
+        required: true
+    },
+    vue:{
+        type: Number,
+        required: true
+    },
+    motCles: { 
+        type : Array ,
+         default : [] 
+    },
+    lienPhoto:{
+        type: String,
+        required: true
+    },
+    lienPdf:{
+        type: String,
+        required: true
+    },
+    frequence:{
+        type: Number,
+        required: true
+    },
+    authorName:{
+        type: String,
+        required: true
     }
 })
 
 const validateBook = book => {
     const schema  = yup.object().shape({
-        bookName: yup.string().required().min(3).max(50),
-        authorName: yup.string().required().min(3).max(40),
-        authorAge: yup.number().required().min(10).max(100)
+
+        nameBook: yup.string().required(),
+        sommaire: yup.array().required,
+        description: yup.string().required().min(40),
+        read: yup.number().required(),
+        start: yup.number().required(),
+        vue: yup.number().required(),
+        motCles: yup.array().required(),
+        lienPhoto: yup.string().required(),
+        lienPdf: yup.string().required(),
+        frequence: yup.number().required(),
+        authorName: yup.string().required()
     })
 
     return schema
